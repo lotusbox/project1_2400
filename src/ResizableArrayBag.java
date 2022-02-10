@@ -1,11 +1,12 @@
 import java.util.Arrays;
 
-public class ResizableArrayBag<T> implements BagInterface<T>{
+public class ResizableArrayBag<T> implements BagInterface<T>{ //resizable array bag implements bag interface to 'inherit' methods that need 
+                                                              //to be customized for a resizable bag   
 
-    private final T[] bag;
-    private static final int DEFAULT_CAPACITY = 25;
-    public int capacity;
-    private int numberOfEntries;
+    private final T[] bag; //final so reference will not change
+    private static final int DEFAULT_CAPACITY = 25; //the default size of the array, this is a resizeable array class
+    public int capacity; //the constructor receives a parameter to fill this field with to define a new array with higher capacity if needed
+    private int numberOfEntries; //will change everytime an enry is put into the bag
 
 
     public ResizableArrayBag(){ //default constructor
@@ -14,10 +15,10 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
 
     public ResizableArrayBag(int capacity){
         numberOfEntries = 0;
-        @SuppressWarnings("unchecked")
-        T[] tempBag = (T[])new Object[capacity];
-        this.capacity = capacity;
-        bag = tempBag;
+        @SuppressWarnings("unchecked") //these three lines cast a new object into the bag class, which is generic, because
+        T[] tempBag = (T[])new Object[capacity]; //we do not yet know what T[] will be
+        this.capacity = capacity; //must use @suppress warning because this type of operation is typically unsafe or unchecked
+        bag = tempBag; //temp bag, our temporary bag, is assigned to bag, our proper bag, becaue is now has an appropriate size
     }
 
     @Override
@@ -93,7 +94,8 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
     }
 
     @Override
-    public T[] toArray(T[] a) {
+    public T[] toArray
+    |(T[] a) {
         return Arrays.copyOf(bag, numberOfEntries);
     }
 
