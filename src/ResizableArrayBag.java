@@ -28,7 +28,10 @@ public class ResizableArrayBag<T> implements BagInterface<T>{ //resizable array 
 
     @Override
     public boolean isEmpty() {
-        return numberOfEntries == 0;
+        if (numberOfEntries != 0)
+            return false;
+        else
+            return true;
     }
 
     @Override
@@ -94,8 +97,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{ //resizable array 
     }
 
     @Override
-    public T[] toArray
-    |(T[] a) {
+    public T[] toArray (T[] a) {
         return Arrays.copyOf(bag, numberOfEntries);
     }
 
@@ -106,6 +108,20 @@ public class ResizableArrayBag<T> implements BagInterface<T>{ //resizable array 
             this.add(aBag.bag[i]);
         }
         return this;
+        /*
+        @SuppressWarnings("unchecked")
+        T[] tempbag = (T[])new Object[this.numberOfEntries + aBag.getCurrentSize];
+        
+        for(int i = 0; i < this.numberofEntries; i++){
+            tempbag.add(this[i]);
+        }
+        for(int i = 0; i < aBag.getCurrentSize; i++)
+        {
+            tempbag.add(aBag[i]);
+        }
+
+        return tempbag;
+        */ 
     }
 
     public ResizableArrayBag<T> Intersection(ResizableArrayBag<T> aBag){
