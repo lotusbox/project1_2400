@@ -147,7 +147,9 @@ public class ResizableArrayBag<T> implements BagInterface<T>{ //resizable array 
                 if (this[i] == aBag[j])
                     break;
             }
-
+            //not sure solution after this, i used break because if they are the same we dont add or need to look further
+            //problem arises because i can figure out how to eliminate the ones that are the same but not how to get the ones that
+            //are not the same to add to tempbag
         return tempbag;
     }
 
