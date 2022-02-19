@@ -111,7 +111,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{ //resizable array 
         /*
         @SuppressWarnings("unchecked")
         T[] tempbag = (T[])new Object[this.numberOfEntries + aBag.getCurrentSize];
-        
+
         for(int i = 0; i < this.numberofEntries; i++){
             tempbag.add(this[i]);
         }
@@ -125,11 +125,30 @@ public class ResizableArrayBag<T> implements BagInterface<T>{ //resizable array 
     }
 
     public ResizableArrayBag<T> Intersection(ResizableArrayBag<T> aBag){
-        return null;
+        @SuppressWarnings("unchecked")
+        T[] tempbag = (T[])new Object[DEFAULT_CAPACITY];
+
+        for (int i = 0; i < this.numberOfEntries; i++)
+            for (int j = 0; j < aBag.getCurrentSize(); j++){
+                if (this[i] == aBag[j])
+                    tempbag.add(this[i]);
+            }
+
+        return tempbag;
+        
     }
 
     public ResizableArrayBag<T> Difference(ResizableArrayBag<T> aBag){
-        return null;
+        @SuppressWarnings("unchecked")
+        T[] tempbag = (T[])new Object[DEFAULT_CAPACITY];
+
+        for (int i = 0; i < this.numberOfEntries; i++)
+            for (int j = 0; j < aBag.getCurrentSize(); j++){
+                if (this[i] == aBag[j])
+                    break;
+            }
+
+        return tempbag;
     }
 
 
