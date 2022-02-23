@@ -1,48 +1,52 @@
 public class LinkedBag<T> implements BagInterface<T>{
 
     
-    private static final int DEFAULT_CAPACITY = 25; //the default size of the array, this is a resizeable array class
+    private static final int DEFAULT_CAPACITY = 25; //the max size of the linkedBag (linked lists do not have a limit capacity so we define one here as default)
     private int numberOfEntries; //will change everytime an enry is put into the bag
 
-    /******************************************* Linked List Implementation <Start> *******************************************/
+    /******************************************* Linked List Implementation <Start> ********************************************/
 
-    
+    //the LinkedBag uses a linked list to store objects
 
+    //a node is an obj in a linked list.  It stores one object @data and points to the next node @next;
+    //it also has getters and setters as defined by the assignment, but not actually necessary.
     private class Node {
-        private T data;
-        private Node next;
+        private T data; //stores one  object
+        private Node next; 
+        //points to the "next" node.  initially points to null.  each time 1 element is added to the bag, a new Node is created to store the new element.
+        //this new node becomes the new "head" or first node in the chain.  The @next of this new node points to the previous "head", extending the chain
 
-        private Node(T data){
-            this(data, null);
+        private Node(T data){//constructor for a node
+            this(data, null);//constructor within a constructor (see next constructor)
         }
 
-        private Node(T data, Node next){
+        private Node(T data, Node next){//constructor for a node that sets data and next simultaneously (this is odd but the class notes write it this way)
             this.data = data;
             this.next = next;
         }
 
-        private T getData(){
+        private T getData(){//returns the item stored in this node
             return data;
         }
 
-        private void setData(T newData){
+        private void setData(T newData){//replaces the item stored in this node
             data = newData;
         }
 
-        private Node getNextNode(){
+        private Node getNextNode(){//returns the address of the next node
             return next;
         }
 
-        private void setNextNode(Node nextNode){
+        private void setNextNode(Node nextNode){//sets the address of the next node
             next = nextNode;
         }
     }
 
-    private Node head = new Node(null);
+    private Node head = new Node(null);  //the default "head" of the linked list.  Initially, @head holds nothing and points to null.
 
     /******************************************* Linked List Implementation <End> *******************************************/
 
-    public LinkedBag(){
+    public LinkedBag(){ //constuctor for a linked bag;
         head = null;
         numberOfEntries = 0;
     }
@@ -53,9 +57,9 @@ public class LinkedBag<T> implements BagInterface<T>{
     public LinkedBag(BagInterface<T> copy){ 
         head = null;
         numberOfEntries = 0;
-        T[] tempBag = copy.toArray(); //duplicates array of objects
+        T[] tempBag = copy.toArray(); //converts "copy" into an array.  We don't know if the bag to be cloned is a linked or array bag
         for(T each : tempBag){
-            this.add(each);
+            this.add(each);//fills this linked bag with the array's contents
         }
     }
 
@@ -77,11 +81,10 @@ public class LinkedBag<T> implements BagInterface<T>{
     @Override
     public boolean add(T newEntry) {
         
-        if(!isFull()){
-            Node nextNode = new Node(newEntry);
-            nextNode.next = head;
-            head = nextNode;
-            //head.next = nextNode;
+        if(!isFull()){//if the Default Capacity is not reached (in this case we set it at 25,  otherwise it would be infinite)
+            Node newNode = new Node(newEntry);//create a new node filled with the element we want to add to the bag
+            newNode.next = head; //point the "next node" pointer at head (head was the previous start of the chain)
+            head = newNode; //set head as the new node.  Now the new node or new head is first, and it points at the previous head, which is now second in line.
             System.out.println(newEntry + " successfully added!");
             numberOfEntries++;
             return true;
@@ -93,10 +96,10 @@ public class LinkedBag<T> implements BagInterface<T>{
 
     @Override
     public T remove() {
-        T result = null;
-        if(head != null){
-            result = head.getData();
-            head = head.getNextNode();
+        T result = null; //create a temp holder named result
+        if(head != null){//if the first element is not empty (the linked list is  not empty)
+            result = head.getData();//fill the temp holder with head's data so we can return it
+            head = head.getNextNode(); //we are deleting the head node, so the new head is the next node after head
             numberOfEntries--;
         }
         
@@ -105,12 +108,12 @@ public class LinkedBag<T> implements BagInterface<T>{
 
     @Override
     public boolean remove(T anEntry) {
-        boolean result = false;
-        Node nodeN = getReferenceTo(anEntry);
-
-        if(nodeN != null){
-            nodeN.setData(head.getData());
-            head = head.getNextNode();
+        boolean result = false; //by default, entry is not found
+        
+        Node deleteThisNode = getReferenceTo(anEntry); //create a new node and try to find @anEntry, if found, deletethisnode will point to that node by reference
+        if(deleteThisNode != null){//if an Entry is found, deleteThisNode will no longer be null
+            deleteThisNode.setData(head.getData());//because we want to delete the node we found, we replace its data with the data from head (because head is easiest to access)
+            head = head.getNextNode();//next, head is deleted.  The node following head becomes the new head.  Data from the old head is now stored in the deleteThisNode's location, and the original data from that node is gone
             numberOfEntries--;
 
             result = true;
@@ -174,7 +177,7 @@ public class LinkedBag<T> implements BagInterface<T>{
         return result;
     }
 
-    public String toString(){
+    public String toString(){ //this is for testing
 
         String output = "\nEntries: " + this.getCurrentSize() + "\nContents:\n";
 
