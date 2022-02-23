@@ -147,7 +147,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{ //resizable array 
         return tempBag;
     }
 
-    public BagInterface<T> intersection(BagInterface<T> aBag){
+    public BagInterface<T> intersection(BagInterface<T> aBag){//input can bve null
         //cloning...
         BagInterface<T> tempBag = new ResizableArrayBag<T>(DEFAULT_CAPACITY);
         ResizableArrayBag<T> thisClone = new ResizableArrayBag<T>(this);
@@ -172,7 +172,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{ //resizable array 
         return outputBag;
     }
 
-    public BagInterface<T> difference(ResizableArrayBag<T> aBag){
+    public BagInterface<T> difference(BagInterface<T> aBag){
         //cloning...
         BagInterface<T> tempBag = new ResizableArrayBag<T>(DEFAULT_CAPACITY);
         ResizableArrayBag<T> thisClone = new ResizableArrayBag<T>(this);
@@ -213,3 +213,5 @@ public class ResizableArrayBag<T> implements BagInterface<T>{ //resizable array 
     }
     
 }
+
+//random comment
