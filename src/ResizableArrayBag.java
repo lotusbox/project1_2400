@@ -1,4 +1,4 @@
-import java.util.Arrays;
+
 
 public class ResizableArrayBag<T> implements BagInterface<T>{ //resizable array bag implements bag interface to 'inherit' methods that need 
                                                               //to be customized for a resizable bag 
