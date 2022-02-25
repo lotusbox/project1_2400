@@ -1,11 +1,12 @@
 public class LinkedBag implements BagInterface{
 
-    private Node head;
+    private Node    
+    // need to define next node data field
 
 
     class Node <T> {
         T data;
-
+        private Node nextNode;
 
     }
 
@@ -24,12 +25,14 @@ public class LinkedBag implements BagInterface{
     @Override
     public boolean isFull() {
         // TODO Auto-generated method stub
+        // dont need to add because a linked bag cant be full???
         return false;
     }
 
     @Override
     public boolean add(Object newEntry) {
         // TODO Auto-generated method stub
+        // create new node
         return false;
     }
 

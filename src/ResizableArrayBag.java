@@ -97,7 +97,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{ //resizable array 
     }
 
     @Override
-    public T[] toArray (T[] a) {
+    public T[] toArray (T anEntry) {
         return Arrays.copyOf(bag, numberOfEntries);
     }
 
