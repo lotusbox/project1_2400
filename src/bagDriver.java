@@ -9,10 +9,10 @@ public class bagDriver {
         String[] arrayDriverStringsOne = {"This", "is", "the", "driver", "program", "for", "project", "one!"};
         String[] arrayDriverStringTwo = {"This", "is", "a", "test", "string", "for", "project", "one."};
 
-        ResizableArrayBag<String> bag1 = new ResizableArrayBag<>();
-        ResizableArrayBag<String> bag2 = new ResizableArrayBag<>();
-        LinkedBag<String> bagOne = new LinkedBag<>();
-        LinkedBag<String> bagTwo = new LinkedBag<>();
+        ResizableArrayBag<String> bag1 = new ResizableArrayBag<String>();
+        ResizableArrayBag<String> bag2 = new ResizableArrayBag<String>();
+        LinkedBag<String> bagOne = new LinkedBag<String>();
+        LinkedBag<String> bagTwo = new LinkedBag<String>();
 
         for (int i = 0; i < arrayDriverStringsOne.length; i++){
             bag1.add(arrayDriverStringsOne[i]);
@@ -22,14 +22,13 @@ public class bagDriver {
             bag2.add(arrayDriverStringTwo[i]);
         }
 
-        ResizableArrayBag<String> newUnion = (ResizableArrayBag<String>) bag1.union(bag2);
-        System.out.println(newUnion.toString());
+        //testing union
+        System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
+        //testing intersection
+        System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
 
-        ResizableArrayBag<String> newIntersection = (ResizableArrayBag<String>) bag1.intersection(bag2);
-        System.out.println(newIntersection.toString());
-
-        ResizableArrayBag<String> newDifference = (ResizableArrayBag<String>) bag1.difference(bag2);
-        System.out.println(newDifference.toString());
+        //testing difference
+        System.out.println(Arrays.toString(bag1.difference(bag2).toArray())); 
 
         for (int i = 0; i < arrayDriverStringsOne.length; i++){
             bagOne.add(arrayDriverStringsOne[i]);
@@ -39,14 +38,14 @@ public class bagDriver {
             bagTwo.add(arrayDriverStringTwo[i]);
         }
 
-        LinkedBag<String> linkedUnion = (LinkedBag<String>) bagOne.union(bagTwo);
-        System.out.println(linkedUnion.toString());
+        //testing union
+        System.out.println(Arrays.toString(bagOne.union(bagTwo).toArray()));
 
-        LinkedBag<String> linkedIntersection = (LinkedBag<String>) bagOne.union(bagTwo);
-        System.out.println(linkedIntersection.toString());
+        //testing intersection
+        System.out.println(Arrays.toString(bagOne.intersection(bagTwo).toArray()));
 
-        LinkedBag<String> linkedDifference = (LinkedBag<String>) bagOne.union(bagTwo);
-        System.out.println(linkedDifference.toString());
+        //testing difference
+        System.out.println(Arrays.toString(bagOne.difference(bagTwo).toArray())); 
 
 
 
