@@ -17,7 +17,7 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).\
 **Members**\
-Cong Shen
+Cong Shen\
 Milo McCard\
 **Contributions**\
 Cong wrote the code that is being used in our driver program including the union, intersection, and difference methods for both interfaces. Milo wrote the driver class that demonstrated the capabilities of the class methods. Cong also wrote the test programs that we used to test each method locally. Each member made an effort to communitcate through Discord and the be reachable when any questions arose. \
