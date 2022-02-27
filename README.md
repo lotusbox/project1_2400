@@ -15,11 +15,11 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 
 ## Dependency Management
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).\
 **Members**\
 Cong Shen
-Milo McCard
+Milo McCard\
 **Contributions**\
-Cong wrote the code that is being used in our driver program including the union, intersection, and difference methods for both interfaces. Milo wrote the driver class that demonstrated the capabilities of the class methods. Cong also wrote the test programs that we used to test each method locally. Each member made an effort to communitcate through Discord and the be reachable when any questions arose. 
+Cong wrote the code that is being used in our driver program including the union, intersection, and difference methods for both interfaces. Milo wrote the driver class that demonstrated the capabilities of the class methods. Cong also wrote the test programs that we used to test each method locally. Each member made an effort to communitcate through Discord and the be reachable when any questions arose. \
 **Additional Features**\
 Cong wrote a toString method in each interface for testing purposes and testing classes to ensure the classes worked properly before implementing them in the driver program.
