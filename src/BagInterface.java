@@ -40,10 +40,16 @@ public boolean contains(T anEntry);
     @return  A newly allocated array of all the entries in the bag. Note: If the bag is empty, the returned array is empty. */
 public T[] toArray();
 
-//public T union(T[] T);
+/** Returns the union of elements in two bags.
+    @return  A new bag containing all elements of both bags, including duplicates */
+public BagInterface<T> union(BagInterface<T> aBag);
 
-//public T intersection(T[] T);
+/** Returns the intersection of elements in two bags.
+    @return  A new bag containing the intersection of both bags */
+public BagInterface<T> intersection(BagInterface<T> aBag);
 
-//public T difference(T[] T);
+/** Returns the difference of elements in two bags.
+    @return  A new bag containing the difference of the first bag minus the contents of @param aBag */
+public BagInterface<T> difference(BagInterface<T> aBag);
 
 }
