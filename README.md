@@ -10,4 +10,4 @@ Rudimentary test cases included as methods in ArrayBagTest and LinkedBagTest and
 https://youtu.be/VNCHzk_JRWQ \
 **Javadoc Start Page Link**\
 https://github.com/lotusbox/project1_2400/blob/master/doc/index.html \
-note that javadocs are included in the doc folder\
+note that javadocs are included in the doc folder
