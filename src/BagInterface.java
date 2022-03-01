@@ -7,6 +7,8 @@ public int getCurrentSize();
     @return  True if the bag is empty, or false if not. */
 public boolean isEmpty();
 
+/** Sees whether this bag is full.
+    @return  True if the bag is full, or false if not. */
 public boolean isFull();
      
 /** Adds a new entry to this bag.

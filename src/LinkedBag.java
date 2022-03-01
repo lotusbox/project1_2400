@@ -9,7 +9,6 @@ public class LinkedBag<T> implements BagInterface<T>{
     //the LinkedBag uses a linked list to store objects
 
     //a node is an obj in a linked list.  It stores one object @data and points to the next node @next;
-    //it also has getters and setters as defined by the assignment, but not actually necessary.
     private class Node {
         private T data; //stores one  object
         private Node next; 
@@ -46,14 +45,18 @@ public class LinkedBag<T> implements BagInterface<T>{
 
     /******************************************* Linked List Implementation <End> *******************************************/
 
+    /** 
+     * Default Constructor
+     */
     public LinkedBag(){ //constuctor for a linked bag;
         head = null;
         numberOfEntries = 0;
     }
 
 
-    //This "copy constructor" will create a duplicate of a bag so we do not affect
-    //the contents of the original bags
+    /** 
+     * This "copy constructor" will create a duplicate of a bag so we do not affect the contents of the original bags
+     */
     public LinkedBag(BagInterface<T> copy){ 
         head = null;
         numberOfEntries = 0;
@@ -63,37 +66,48 @@ public class LinkedBag<T> implements BagInterface<T>{
         }
     }
 
+    /** Gets the current number of entries in this bag.
+     @return  The integer number of entries currently in the bag. */
     @Override
     public int getCurrentSize() {
         return numberOfEntries;
     }
 
+    /** Sees whether this bag is empty.
+    @return  True if the bag is empty, or false if not. */
     @Override
     public boolean isEmpty() {
         return numberOfEntries == 0;
     }
 
+    /** Sees whether this bag is full.
+    @return  True if the bag is full, or false if not. */
     @Override
     public boolean isFull() {
         return numberOfEntries == DEFAULT_CAPACITY;
     }
 
+    /** Adds a new entry to this bag.
+    @param newEntry  The object to be added as a new entry.
+    @return  True if the addition is successful, or false if not. */
     @Override
     public boolean add(T newEntry) {
         
-        if(!isFull()){//if the Default Capacity is not reached (in this case we set it at 25,  otherwise it would be infinite)
+        if(!isFull() && newEntry != null){//if the Default Capacity is not reached (in this case we set it at 25,  otherwise it would be infinite)
             Node newNode = new Node(newEntry);//create a new node filled with the element we want to add to the bag
             newNode.next = head; //point the "next node" pointer at head (head was the previous start of the chain)
             head = newNode; //set head as the new node.  Now the new node or new head is first, and it points at the previous head, which is now second in line.
-            System.out.println(newEntry + " successfully added!");
+            //System.out.println(newEntry + " successfully added!");
             numberOfEntries++;
             return true;
         }else{
-            System.out.println("Cannot add " + newEntry + ", capacity of" + DEFAULT_CAPACITY + " reached.");
+            //System.out.println("Cannot add " + newEntry);
             return false;
         }
     }
 
+    /** Removes one unspecified entry from this bag, if possible.
+    @return  Either the removed entry, if the removal was successful, or null. */
     @Override
     public T remove() {
         T result = null; //create a temp holder named result
@@ -101,33 +115,41 @@ public class LinkedBag<T> implements BagInterface<T>{
             result = head.getData();//fill the temp holder with head's data so we can return it
             head = head.getNextNode(); //we are deleting the head node, so the new head is the next node after head
             numberOfEntries--;
+            //System.out.println(result + " succesfully removed!");
         }
         
         return result;
     }
 
+    /** Removes one occurrence of a given entry from this bag, if possible.
+    @param anEntry  The entry to be removed.
+    @return  True if the removal was successful, or false if not. */
     @Override
     public boolean remove(T anEntry) {
         boolean result = false; //by default, entry is not found
         
         Node deleteThisNode = getReferenceTo(anEntry); //create a new node and try to find @anEntry, if found, deletethisnode will point to that node by reference
         if(deleteThisNode != null){//if an Entry is found, deleteThisNode will no longer be null
+            //System.out.println(deleteThisNode.getData() + " succesfully removed!");
             deleteThisNode.setData(head.getData());//because we want to delete the node we found, we replace its data with the data from head (because head is easiest to access)
             head = head.getNextNode();//next, head is deleted.  The node following head becomes the new head.  Data from the old head is now stored in the deleteThisNode's location, and the original data from that node is gone
             numberOfEntries--;
-
             result = true;
         }
 
-        return false;
+        return result;
     }
 
+    /** Removes all entries from this bag. */
     @Override
     public void clear() {
         while(!isEmpty())
             remove();
     }
 
+    /** Counts the number of times a given entry appears in this bag.
+    @param anEntry  The entry to be counted.
+    @return  The number of times anEntry appears in the bag. */
     @Override
     public int getFrequencyOf(T anEntry) {
         int frequency = 0;
@@ -146,6 +168,9 @@ public class LinkedBag<T> implements BagInterface<T>{
         return frequency;
     }
 
+    /** Tests whether this bag contains a given entry.
+    @param anEntry  The entry to find.
+    @return  True if the bag contains anEntry, or false if not. */
     @Override
     public boolean contains(T anEntry) {
         boolean found = false;
@@ -161,6 +186,8 @@ public class LinkedBag<T> implements BagInterface<T>{
         return found;
     }
 
+    /** Retrieves all entries that are in this bag.
+    @return  A newly allocated array of all the entries in the bag. Note: If the bag is empty, the returned array is empty. */
     @Override
     public T[] toArray() {
         @SuppressWarnings("unchecked")
@@ -177,6 +204,8 @@ public class LinkedBag<T> implements BagInterface<T>{
         return result;
     }
 
+    /** Outputs data about a bag, used for testing purposes
+     @return  A bag's capacity, entries, and contents as a String */
     public String toString(){ //this is for testing
 
         String output = "\nEntries: " + this.getCurrentSize() + "\nContents:\n";
@@ -199,6 +228,8 @@ public class LinkedBag<T> implements BagInterface<T>{
 
         /****************************************************** 3 METHODS ******************************************************/
 
+    /** Returns the union of elements in two bags.
+    @return  A new bag containing all elements of both bags, including duplicates */
     public BagInterface<T> union(BagInterface<T> aBag){ //returns a BagInterface per instructions (means can be arraybag or linked bag)
         BagInterface<T> tempBag = new LinkedBag<T>(); //temp bag for output
         LinkedBag<T> thisClone = new LinkedBag<T>(this); //clone of "this" bag (bag 1)
@@ -213,6 +244,8 @@ public class LinkedBag<T> implements BagInterface<T>{
         return tempBag;
     }
 
+    /** Returns the intersection of elements in two bags.
+    @return  A new bag containing the intersection of both bags */
     public BagInterface<T> intersection(BagInterface<T> aBag){//input can bve null
         //cloning...
         BagInterface<T> tempBag = new LinkedBag<T>();
@@ -226,52 +259,41 @@ public class LinkedBag<T> implements BagInterface<T>{
             }
         }
 
-        //move items from temp bag to a new bag for output
-        //this step is necessary because temp bag's capacity is too big
-        //e.g. tempbag = [a, b, c, null, null, null, ...]
-        //so create an output bag that's only big enough to hold [a, b, c]
-        BagInterface<T> outputBag = new LinkedBag<T>();
-        while(!tempBag.isEmpty()){
-            outputBag.add(tempBag.remove());
-        }
-
-        return outputBag;
+        return tempBag;
     }
 
+    /** Returns the difference of elements in two bags.
+    @return  A new bag containing the difference of the first bag minus the contents of @param aBag */
     public BagInterface<T> difference(BagInterface<T> aBag){
         //cloning...
         LinkedBag<T> thisClone = new LinkedBag<T>(this);
-        LinkedBag<T> aBagClone = new LinkedBag<T>(aBag);
+        LinkedBag<T> aBagClone = new LinkedBag<T>(aBag);        
 
         while(!aBagClone.isEmpty()){//while bag2 is not empty
             thisClone.remove(aBagClone.remove());//remove an item from bag2 and try to remove it from bag1
         }
-        
-        //move items from tempbag to new bag for output
-        BagInterface<T> outputBag = new LinkedBag<T>();
-        while(!thisClone.isEmpty()){
-            outputBag.add(thisClone.remove());
-        }
 
-        return outputBag;
+        return thisClone;
 
     }
 
     /****************************************************** HELPERS ******************************************************/
 
+    /** Returns the address of a node containing @param anEntry, if found
+    @return  The first node containing the data, if found */
     private Node getReferenceTo(T anEntry){
 
-        boolean found = false;
         Node currentNode = head;
 
-        while(!found && (currentNode != null)){
-            if(anEntry.equals((currentNode.getData())))
-                found = true;
+        while(currentNode != null){
+            if(anEntry.equals((currentNode.getData()))){
+                return currentNode;
+            }
             else
             currentNode = currentNode.getNextNode();
         }
 
-        return currentNode;
+        return null;
     }
 
 
